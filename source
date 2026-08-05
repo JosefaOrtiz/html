@@ -126003,6 +126003,46 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   </div>
 
   <div algorithm>
+  <p><code>Element</code>'s <dfn method for="Element"><code
+  data-x="dom-Element-appendHTMLUnsafe">appendHTMLUnsafe(<var>html</var>,
+  <var>options</var>)</code></dfn> method steps are:</p>
+
+  <ol>
+   <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">Element appendHTMLUnsafe</code>".</p></li>
+
+   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
+   given <span>this</span>.</p></li>
+
+   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>compliantHTML</var>,
+   null, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
+  </ol>
+  </div>
+
+  <div algorithm>
+  <p><code>Element</code>'s <dfn method for="Element"><code
+  data-x="dom-Element-prependHTMLUnsafe">prependHTMLUnsafe(<var>html</var>,
+  <var>options</var>)</code></dfn> method steps are:</p>
+
+  <ol>
+   <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">Element prependHTMLUnsafe</code>".</p></li>
+
+   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
+   given <span>this</span>.</p></li>
+
+   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>compliantHTML</var>,
+   <var>target</var>'s <span>first child</span>, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
+  </ol>
+  </div>
+
+  <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-setHTMLUnsafe">setHTMLUnsafe(<var>html</var>,
   <var>options</var>)</code></dfn> method steps are:</p>
@@ -126025,14 +126065,13 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <ol>
    <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
-   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with <code
-   data-x="tt-trustedhtml">TrustedHTML</code>, <span>this</span>'s <span>relevant global
-   object</span>, <var>html</var>, <var>options</var>, and "<code data-x="">ShadowRoot
-   appendHTMLUnsafe</code>".</p></li>
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">ShadowRoot appendHTMLUnsafe</code>".</p></li>
 
-   <li><p><span data-x="filter and pre-insert html">Filter and pre-insert</span>
-   <var>compliantHTML</var> into <span>this</span> given null and
-   <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <span>this</span>, <var>compliantHTML</var>,
+   null, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126043,14 +126082,13 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <ol>
    <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
-   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with <code
-   data-x="tt-trustedhtml">TrustedHTML</code>, <span>this</span>'s <span>relevant global
-   object</span>, <var>html</var>, <var>options</var>, and "<code data-x="">ShadowRoot
-   prependHTMLUnsafe</code>".</p></li>
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">ShadowRoot prependHTMLUnsafe</code>".</p></li>
 
-   <li><p><span data-x="filter and pre-insert html">Filter and pre-insert</span>
-   <var>compliantHTML</var> into  <span>this</span> given <span>this</span>'s <span>first
-   child</span> and <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <span>this</span>, <var>compliantHTML</var>,
+   <span>this</span>'s <span>first child</span>, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126061,19 +126099,18 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <ol>
    <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
-   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with <code
-   data-x="tt-trustedhtml">TrustedHTML</code>, <span>this</span>'s <span>relevant global
-   object</span>, <var>html</var>, <var>options</var>, and "<code data-x="">Node
-   beforeHTMLUnsafe</code>".</p></li>
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">Node beforeHTMLUnsafe</code>".</p></li>
 
    <li><p>Let <var>parent</var> be the <span>parent for HTML insertion</span> for
    <span>this</span>.</p></li>
 
    <li><p>If <var>parent</var> is null, return.</p></li>
 
-   <li><p><span data-x="filter and pre-insert html">Filter and pre-insert</span>
-   <var>compliantHTML</var> into <var>parent</var> given <span>this</span> and
-   <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>compliantHTML</var>,
+   <span>this</span>, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126084,19 +126121,18 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <ol>
    <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
-   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with <code
-   data-x="tt-trustedhtml">TrustedHTML</code>, <span>this</span>'s <span>relevant global
-   object</span>, <var>html</var>, <var>options</var>, and "<code data-x="">Node
-   afterHTMLUnsafe</code>".</p></li>
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">Node afterHTMLUnsafe</code>".</p></li>
 
    <li><p>Let <var>parent</var> be the <span>parent for HTML insertion</span> for
    <span>this</span>.</p></li>
 
    <li><p>If <var>parent</var> is null, return.</p></li>
 
-   <li><p><span data-x="filter and pre-insert html">Filter and pre-insert</span>
-   <var>compliantHTML</var> into  <var>parent</var> given <span>this</span>'s <span>next
-   sibling</span> and <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>compliantHTML</var>,
+   <span>this</span>'s <span>next sibling</span>, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126107,16 +126143,16 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <ol>
    <li><p>Let (<var>compliantHTML</var>, <var>compliantOptions</var>) be the result of invoking the
-   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with <code
-   data-x="tt-trustedhtml">TrustedHTML</code>, <span>this</span>'s <span>relevant global
-   object</span>, <var>html</var>, <var>options</var>, and "<code data-x="">Node
-   replaceWithHTMLUnsafe</code>".</p></li>
+   <span data-x="tt-getcompliantinput">get trusted type compliant input</span> algorithm with
+   <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
+   "<code data-x="">Node replaceWithHTMLUnsafe</code>".</p></li>
 
    <li><p>If the <span>parent for HTML insertion</span> for <span>this</span> is null,
    return.</p></li>
 
-   <li><p><span data-x="filter and replace with html">Filter and replace</span> <span>this</span>
-   with <var>compliantHTML</var> and <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and replace with HTML</span> given <span>this</span>,
+   <var>compliantHTML</var>, <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126314,6 +126350,18 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   </dl>
 
   <div algorithm>
+  <p>To get the <dfn>HTML insertion target</dfn>, given an <code>Element</code>
+  <var>element</var>:</p>
+
+  <ol>
+   <li><p>If <var>element</var> is a <code>template</code> element, then return <var>element</var>'s
+   <span>template contents</span>.</p></li>
+
+   <li><p>Return <var>element</var>.</p></li>
+  </ol>
+  </div>
+
+  <div algorithm>
   <p>To get the <dfn>parent for HTML insertion</dfn>, given a <code>Node</code> <var>node</var>:</p>
 
   <ol>
@@ -126344,18 +126392,19 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   </div>
 
   <div algorithm>
-  <p>To <dfn>filter and pre-insert HTML</dfn>, given a <span>string</span> <var>html</var>, an
-  <code>Element</code> or <code>DocumentFragment</code> <var>target</var>, a
-  null-or-<code>Node</code> <var>nextChild</var>, a dictionary <var>options</var>, and a boolean
-  <var>safe</var> (default false):</p>
+  <p>To <dfn>filter and pre-insert HTML</dfn>, given an <code>Element</code> or
+  <code>DocumentFragment</code> <var>target</var>, a <span>string</span> <var>html</var>, a
+  null-or-<code>Node</code> <var>nextChild</var>, a dictionary <var>options</var>, and an optional
+  <span>fragment parser mode</span> <var>mode</var> (default <span
+  data-x="fragment-parser-mode-normal">Normal</span>):</p>
 
   <ol>
    <li><p>If <var>target</var> is a <code>template</code> element, then set <var>target</var> to
    <var>target</var>'s <span>template contents</span>.</p></li>
 
-   <li><p>Let <var>fragment</var> be the result of  invoking the <span>fragment parsing algorithm
+   <li><p>Let <var>fragment</var> be the result of invoking the <span>fragment parsing algorithm
    steps</span> given <var>target</var>, <var>html</var>, <var>options</var>, and
-   <var>safe</var>.</p></li>
+   <var>mode</var>.</p></li>
 
    <li><p>If <var>fragment</var> is non-null, then <span>pre-insert</span> <var>fragment</var> into
    <var>target</var> before <var>nextChild</var>.</p></li>
@@ -126363,18 +126412,19 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   </div>
 
   <div algorithm>
-  <p>To <dfn>filter and replace with HTML</dfn>, given an <code>Element</code> or
-  <code>DocumentFragment</code> <var>target</var>, a <span>string</span> <var>html</var>, a
-  dictionary <var>options</var>, and a boolean <var>safe</var> (default false):</p>
+  <p>To <dfn>filter and replace with HTML</dfn>, given a <code>Node</code> <var>target</var>, a
+  <span>string</span> <var>html</var>, a dictionary <var>options</var>, and an optional
+  <span>fragment parser mode</span> <var>mode</var> (default <span
+  data-x="fragment-parser-mode-normal">Normal</span>):</p>
 
   <ol>
    <li><p>Let <var>parent</var> be <var>target</var>'s <span>parent</span>.</p></li>
 
    <li><p><span>Assert</span>: <var>parent</var> is not null.</p></li>
 
-   <li><p>Let <var>fragment</var> be the result of  invoking the <span>fragment parsing algorithm
-   steps</span> given <var>target</var>, <var>html</var>, <var>options</var>, and
-   <var>safe</var>.</p></li>
+   <li><p>Let <var>fragment</var> be the result of invoking the <span>fragment parsing algorithm
+   steps</span> given <var>parent</var>, <var>html</var>, <var>options</var>, and
+   <var>mode</var>.</p></li>
 
    <li><p>If <var>fragment</var> is non-null, then <span
    data-x="concept-node-replace">replace</span> <var>target</var> with <var>fragment</var> within
@@ -126481,10 +126531,10 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>SetHTMLUnsafeOptions</span> dictionary, and "<code data-x="">Element
    innerHTML</code>".</p></li>
 
-   <li><p>Let <var>target</var> be <span>this</span>'s <span>template contents</span> if
-   <span>this</span> is a <code>template</code> element; otherwise <span>this</span>.</p></li>
+   <li><p>Let <var>target</var> be the <span>HTML insertion target</span> given
+   <span>this</span>.</p></li>
 
-   <li><p><span>Filter and set</span> given <var>target</var>, <var>compliantString</var>,
+   <li><p><span>Filter and set HTML</span> given <var>target</var>, <var>compliantString</var>,
    <var>compliantOptions</var>, and <span
    data-x="fragment-parser-mode-legacy">Legacy</span>.</p></li>
   </ol>
