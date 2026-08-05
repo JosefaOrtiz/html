@@ -128118,6 +128118,7 @@ dictionary <dfn dictionary>SanitizerConfig</dfn> {
 
   <h4>Sanitization algorithms</h4>
 
+
   <div algorithm>
   <p>To <dfn>get a sanitizer instance from options</dfn> from a <code
   data-x="tt-trustedparseroptions">TrustedParserOptions</code> or dictionary <var>options</var>,
