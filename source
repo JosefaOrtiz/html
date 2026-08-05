@@ -125879,15 +125879,22 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   <div algorithm>
   <p><code>Element</code>'s <dfn method for="Element"><code
   data-x="dom-Element-setHTML">setHTML(<var>html</var>, <var>options</var>)</code></dfn> method
-  steps are to <span>filter and set HTML</span> given <var>html</var>, <span>this</span>,
-  <var>options</var>, and true.</p>
+  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>,
+  <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p>
   </div>
 
   <div algorithm>
   <p><code>Element</code>'s <dfn method for="Element"><code
   data-x="dom-Element-appendHTML">appendHTML(<var>html</var>, <var>options</var>)</code></dfn>
-  method steps are to <span data-x="filter and pre-insert html">filter and pre-insert</span>
-  <var>html</var> into <span>this</span> given null, <var>options</var>, and true.</p>
+  method steps are:
+
+  <ol>
+   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
+   given <span>this</span>.</p></li>
+
+   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>html</var>, null,
+   <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+  </ol>
   </div>
 
   <div algorithm>
@@ -125896,35 +125903,36 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   method steps are:
 
   <ol>
-   <li><p>Let <var>refParent</var> be <span>this</span>'s <span>template contents</span> if
-   <span>this</span> is a <code>template</code> element; Otherwise <span>this</span>.</p></li>
+   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
+   given <span>this</span>.</p></li>
 
-   <li><p><span data-x="filter and pre-insert html">Filter and pre-insert</span> <var>html</var>
-   into <span>this</span> given <var>refParent</var>'s <span>first child</span>, <var>options</var>,
-   and true.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>html</var>,
+   <var>target</var>'s <span>first child</span>, <var>options</var>, and <span
+   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
   </ol>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-setHTML">setHTML(<var>html</var>, <var>options</var>)</code></dfn> method
-  steps are to <span>filter and set HTML</span> given <var>html</var>, <span>this</span>,
-  <var>options</var>, and true.</p>
+  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>,
+  <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-appendHTML">appendHTML(<var>html</var>, <var>options</var>)</code></dfn>
-  method steps are to <span data-x="filter and pre-insert html">filter and pre-insert</span>
-  <var>html</var>, <span>this</span>, null, <var>options</var>, and true.</p>
+  method steps are to <span>filter and pre-insert HTML</span> given <span>this</span>,
+  <var>html</var>, null, <var>options</var>, and <span
+  data-x="fragment-parser-mode-normal">Normal</span>.</p>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-prependHTML">prependHTML(<var>html</var>, <var>options</var>)</code></dfn>
-  method steps are to <span data-x="filter and pre-insert html">filter and pre-insert</span>
-  <var>html</var>, <span>this</span>, <span>this</span>'s <span>first child</span>,
-  <var>options</var>, and true.</p>
+  method steps are to <span>filter and pre-insert HTML</span> given <span>this</span>,
+  <var>html</var>, <span>this</span>'s <span>first child</span>, <var>options</var>, and <span
+  data-x="fragment-parser-mode-normal">Normal</span>.</p>
   </div>
 
   <div algorithm>
@@ -125933,8 +125941,47 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   method steps are:
 
   <ol>
-   <li><p><span>Set and filter HTML</span> given <span>this</span>, <var>html</var>, and
-   <var>options</var>.</p></li>
+   <li><p>Let <var>parent</var> be the result of getting the <span>parent for HTML insertion</span>
+   given <span>this</span>.</p></li>
+
+   <li><p>If <var>parent</var> is null, then return.</p></li>
+
+   <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>html</var>,
+   <span>this</span>, <var>options</var>, and <span
+   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+  </ol>
+  </div>
+
+  <div algorithm>
+  <p><code>ChildNode</code>'s <dfn method for="ChildNode"><code
+  data-x="dom-ChildNode-afterHTML">afterHTML(<var>html</var>, <var>options</var>)</code></dfn>
+  method steps are:
+
+  <ol>
+   <li><p>Let <var>parent</var> be the result of getting the <span>parent for HTML insertion</span>
+   given <span>this</span>.</p></li>
+
+   <li><p>If <var>parent</var> is null, then return.</p></li>
+
+   <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>html</var>,
+   <span>this</span>'s <span>next sibling</span>, <var>options</var>, and <span
+   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+  </ol>
+  </div>
+
+  <div algorithm>
+  <p><code>ChildNode</code>'s <dfn method for="ChildNode"><code
+  data-x="dom-ChildNode-replaceWithHTML">replaceWithHTML(<var>html</var>,
+  <var>options</var>)</code></dfn> method steps are:</p>
+
+  <ol>
+   <li><p>Let <var>parent</var> be the result of getting the <span>parent for HTML insertion</span>
+   given <span>this</span>.</p></li>
+
+   <li><p>If <var>parent</var> is null, then return.</p></li>
+
+   <li><p><span>Filter and replace with HTML</span> given <span>this</span>, <var>html</var>,
+   <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
   </ol>
   </div>
 
