@@ -125879,22 +125879,15 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   <div algorithm>
   <p><code>Element</code>'s <dfn method for="Element"><code
   data-x="dom-Element-setHTML">setHTML(<var>html</var>, <var>options</var>)</code></dfn> method
-  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>,
-  <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p>
+  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>, and
+  <var>options</var>.</p>
   </div>
 
   <div algorithm>
   <p><code>Element</code>'s <dfn method for="Element"><code
   data-x="dom-Element-appendHTML">appendHTML(<var>html</var>, <var>options</var>)</code></dfn>
-  method steps are:
-
-  <ol>
-   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
-   given <span>this</span>.</p></li>
-
-   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>html</var>, null,
-   <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
-  </ol>
+  method steps are to <span>filter and pre-insert HTML</span> given <span>this</span>,
+  <var>html</var>, null, and <var>options</var>.</p>
   </div>
 
   <div algorithm>
@@ -125903,36 +125896,33 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   method steps are:
 
   <ol>
-   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
-   given <span>this</span>.</p></li>
+   <li><p>Let <var>firstChild</var> be the <span>first child</span> of <span>this</span>'s
+   <span>HTML insertion target</span>.</p></li>
 
-   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>html</var>,
-   <var>target</var>'s <span>first child</span>, <var>options</var>, and <span
-   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+   <li><p><span>Filter and pre-insert HTML</span> given <span>this</span>, <var>html</var>,
+   <var>firstChild</var>, and <var>options</var>.</p></li>
   </ol>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-setHTML">setHTML(<var>html</var>, <var>options</var>)</code></dfn> method
-  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>,
-  <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p>
+  steps are to <span>filter and set HTML</span> given <span>this</span>, <var>html</var>, and
+  <var>options</var>.</p>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-appendHTML">appendHTML(<var>html</var>, <var>options</var>)</code></dfn>
   method steps are to <span>filter and pre-insert HTML</span> given <span>this</span>,
-  <var>html</var>, null, <var>options</var>, and <span
-  data-x="fragment-parser-mode-normal">Normal</span>.</p>
+  <var>html</var>, null, and <var>options</var>.</p>
   </div>
 
   <div algorithm>
   <p><code>ShadowRoot</code>'s <dfn method for="ShadowRoot"><code
   data-x="dom-ShadowRoot-prependHTML">prependHTML(<var>html</var>, <var>options</var>)</code></dfn>
   method steps are to <span>filter and pre-insert HTML</span> given <span>this</span>,
-  <var>html</var>, <span>this</span>'s <span>first child</span>, <var>options</var>, and <span
-  data-x="fragment-parser-mode-normal">Normal</span>.</p>
+  <var>html</var>, <span>this</span>'s <span>first child</span>, and <var>options</var>.</p>
   </div>
 
   <div algorithm>
@@ -125947,8 +125937,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <li><p>If <var>parent</var> is null, then return.</p></li>
 
    <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>html</var>,
-   <span>this</span>, <var>options</var>, and <span
-   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+   <span>this</span>, and <var>options</var>.</p></li>
   </ol>
   </div>
 
@@ -125964,8 +125953,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <li><p>If <var>parent</var> is null, then return.</p></li>
 
    <li><p><span>Filter and pre-insert HTML</span> given <var>parent</var>, <var>html</var>,
-   <span>this</span>'s <span>next sibling</span>, <var>options</var>, and <span
-   data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+   <span>this</span>'s <span>next sibling</span>, and <var>options</var>.</p></li>
   </ol>
   </div>
 
@@ -125980,8 +125968,8 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
    <li><p>If <var>parent</var> is null, then return.</p></li>
 
-   <li><p><span>Filter and replace with HTML</span> given <span>this</span>, <var>html</var>,
-   <var>options</var>, and <span data-x="fragment-parser-mode-normal">Normal</span>.</p></li>
+   <li><p><span>Filter and replace with HTML</span> given <span>this</span>, <var>html</var>, and
+   <var>options</var>.</p></li>
   </ol>
   </div>
 
@@ -125996,8 +125984,8 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
    "<code data-x="">Element setHTMLUnsafe</code>".</p></li>
 
-   <li><p><span>Filter and set HTML</span> given <var>compliantHTML</var>, <span>this</span>,
-   <var>compliantOptions</var> and <span
+   <li><p><span>Filter and set HTML</span> given <span>this</span>, <var>compliantHTML</var>,
+   <var>compliantOptions</var>, and <span
    data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
@@ -126013,10 +126001,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
    "<code data-x="">Element appendHTMLUnsafe</code>".</p></li>
 
-   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
-   given <span>this</span>.</p></li>
-
-   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>compliantHTML</var>,
+   <li><p><span>Filter and pre-insert HTML</span> given <span>this</span>, <var>compliantHTML</var>,
    null, <var>compliantOptions</var>, and <span
    data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
@@ -126033,11 +126018,11 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, and
    "<code data-x="">Element prependHTMLUnsafe</code>".</p></li>
 
-   <li><p>Let <var>target</var> be the result of getting the <span>HTML insertion target</span>
-   given <span>this</span>.</p></li>
+   <li><p>Let <var>firstChild</var> be the <span>first child</span> of <span>this</span>'s
+   <span>HTML insertion target</span>.</p></li>
 
-   <li><p><span>Filter and pre-insert HTML</span> given <var>target</var>, <var>compliantHTML</var>,
-   <var>target</var>'s <span>first child</span>, <var>compliantOptions</var>, and <span
+   <li><p><span>Filter and pre-insert HTML</span> given <span>this</span>, <var>compliantHTML</var>,
+   <var>firstChild</var>, <var>compliantOptions</var>, and <span
    data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
@@ -126053,8 +126038,9 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>this</span>'s <span>relevant global object</span>, <var>html</var>, <var>options</var>, an
    "<code data-x="">ShadowRoot setHTMLUnsafe</code>".</p></li>
 
-   <li><p><span>Filter and set HTML</span> given <var>compliantHTML</var>, <span>this</span>, and
-   <var>compliantOptions</var>.</p></li>
+   <li><p><span>Filter and set HTML</span> given <span>this</span>, <var>compliantHTML</var>,
+   <var>compliantOptions</var>, and <span
+   data-x="fragment-parser-mode-unsafe">Unsafe</span>.</p></li>
   </ol>
   </div>
 
@@ -126350,14 +126336,14 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   </dl>
 
   <div algorithm>
-  <p>To get the <dfn>HTML insertion target</dfn>, given an <code>Element</code>
-  <var>element</var>:</p>
+  <p>To get the <dfn>HTML insertion target</dfn>, given an <code>Element</code> or
+  <code>DocumentFragment</code> <var>apiCallTarget</var>:</p>
 
   <ol>
-   <li><p>If <var>element</var> is a <code>template</code> element, then return <var>element</var>'s
-   <span>template contents</span>.</p></li>
+   <li><p>If <var>apiCallTarget</var> is a <code>template</code> element, then return
+   <var>apiCallTarget</var>'s <span>template contents</span>.</p></li>
 
-   <li><p>Return <var>element</var>.</p></li>
+   <li><p>Return <var>apiCallTarget</var>.</p></li>
   </ol>
   </div>
 
@@ -126376,12 +126362,15 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <div algorithm>
   <p>To <dfn export>filter and set HTML</dfn>, given an <code>Element</code> or
-  <code>DocumentFragment</code> <var>target</var>, a string <var>html</var>, a dictionary or <code
+  <code>ShadowRoot</code> <var>target</var>, a string <var>html</var>, a dictionary or <code
   data-x="tt-TrustedParserOptions">TrustedParserOptions</code> object <var>options</var>, and an
   optional <span>fragment parser mode</span> <var>mode</var> (default <span
   data-x="fragment-parser-mode-normal">Normal</span>):</p>
 
   <ol>
+   <li><p>Set <var>target</var> be the <span>HTML insertion target</span> given
+   <var>target</var>.</p></li>
+
    <li><p>Let <var>fragment</var> be the result of invoking the <span>fragment parsing algorithm
    steps</span> given <var>target</var>, <var>html</var>, <var>options</var>, and
    <var>mode</var>.</p></li>
@@ -126399,8 +126388,8 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   data-x="fragment-parser-mode-normal">Normal</span>):</p>
 
   <ol>
-   <li><p>If <var>target</var> is a <code>template</code> element, then set <var>target</var> to
-   <var>target</var>'s <span>template contents</span>.</p></li>
+   <li><p>Set <var>target</var> be the <span>HTML insertion target</span> given
+   <var>target</var>.</p></li>
 
    <li><p>Let <var>fragment</var> be the result of invoking the <span>fragment parsing algorithm
    steps</span> given <var>target</var>, <var>html</var>, <var>options</var>, and
@@ -126531,10 +126520,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <span>SetHTMLUnsafeOptions</span> dictionary, and "<code data-x="">Element
    innerHTML</code>".</p></li>
 
-   <li><p>Let <var>target</var> be the <span>HTML insertion target</span> given
-   <span>this</span>.</p></li>
-
-   <li><p><span>Filter and set HTML</span> given <var>target</var>, <var>compliantString</var>,
+   <li><p><span>Filter and set HTML</span> given <span>this</span>, <var>compliantString</var>,
    <var>compliantOptions</var>, and <span
    data-x="fragment-parser-mode-legacy">Legacy</span>.</p></li>
   </ol>
