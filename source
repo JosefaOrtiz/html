@@ -126168,13 +126168,8 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    data-x="concept-document-allow-declarative-shadow-roots">allow declarative shadow roots</span> to
    true.</p></li>
 
-   <li><p>Let <var>sanitizer</var> be the result of calling <span>get a sanitizer instance from
-   options</span> with <var>options</var> and true.</p></li>
-
-   <li><p>Let <var>configuration</var> be <var>sanitizer</var>'s
-   <span>configuration</span>.</p></li>
-
-   <li><p><span>Remove unsafe</span> from <var>configuration</var>.</p></li>
+   <li><p>Let <var>sanitizerConfig</var> be the result of <span data-x="get a sanitizer config from
+   options">getting a sanitizer config from</span> <var>options</var> given true.</p></li>
 
    <li><p><span>Parse HTML from a string</span> given <var>document</var>, <var>html</var>,
    <var>configuration</var>, and true.</p></li>
@@ -126208,14 +126203,11 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    data-x="concept-document-allow-declarative-shadow-roots">allow declarative shadow roots</span> to
    true.</p></li>
 
-   <li><p>Let <var>sanitizer</var> be the result of calling <span>get a sanitizer instance from
+   <li><p>Let <var>sanitizerConfig</var> be the result of calling <span>get a sanitizer config from
    options</span> with <var>compliantOptions</var> and false.</p></li>
 
-   <li><p>Let <var>configuration</var> be null if <var>sanitizer</var> is null; otherwise
-   <var>sanitizer</var>'s <span>configuration</span>.</p></li>
-
    <li><p><span>Parse HTML from a string</span> given <var>document</var>, <var>compliantHTML</var>,
-   <var>configuration</var>, and false.</p></li>
+   <var>sanitizerConfig</var>, and false.</p></li>
 
    <li><p>Return <var>document</var>.</p></li>
   </ol>
@@ -126456,14 +126448,9 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <li><p>Let <var>safe</var> be true if <var>mode</var> is <span
    data-x="fragment-parser-mode-normal">Normal</span>; otherwise false.</p></li>
 
-   <li><p>Let <var>sanitizer</var> be the result of calling <span data-x="get a sanitizer instance
-   from options">getting a sanitizer</span> from <var>options</var> given <var>safe</var>.</p></li>
-
-   <li><p>Let <var>sanitizerConfig</var> be <var>sanitizer</var>'s
-   <span>configuration</span>.</p></li>
-
-   <li><p>If <var>safe</var> is true, then <span>remove unsafe</span> from
-   <var>sanitizerConfig</var>.</p></li>
+   <li><p>Let <var>sanitizerConfig</var> be the result of calling <span data-x="get a sanitizer
+   config from options">getting a sanitizer</span> from <var>options</var> give
+   <var>safe</var>.</p></li>
 
    <li><p>Let <var>scriptingMode</var> be <span data-x="scripting-mode-inert">Inert</span>.</p></li>
 
@@ -128269,7 +128256,13 @@ dictionary <dfn dictionary>SanitizerConfig</dfn> {
     </ol>
    </li>
 
-   <li><p>Return <var>sanitizerSpec</var>.</p></li>
+   <li><p>Let <var>config</var> be <var>sanitizerSpec</var>'s <span
+   data-x="SanitizerConfig">configuration</span>.</p></li>
+
+   <li><p>If <var>safe</var> is true, then <span>remove unsafe</span> from
+   <var>config</var>.</p></li>
+
+   <li><p>Return <var>config</var>.</p></li>
   </ol>
   </div>
 
@@ -145121,6 +145114,34 @@ dictionary <dfn dictionary>StorageEventInit</dfn> : <span>EventInit</span> {
   element</span> given <var>token</var>, the <span>HTML namespace</span>, and false.</p>
   </div>
 
+  <div algorithm>
+  <p>To <dfn data-x="Insert the root HTML element">insert the root HTML element</dfn> given an
+  <span>HTMLElement</span> <var>element</var>:</p>
+
+  <ol>
+   <li>
+    <p>If the parser's <span>parser sanitizer configuration</span> is not null:</p>
+
+    <ol>
+     <li><p>Let <var>action</var> be the result of <span data-x="sanitize">sanitizing</span>
+     <var>element</var> given the parser's <span>parser sanitizer configuration</span> and the
+     parser's <span>remove javascript navigation URLs</span>.</p></li>
+
+     <li><p>If <var>action</var> is "<code data-x="">Remove</code>", then return.</p></li>
+     <li>
+      <p><span>Assert</span>: <var>action</var> is "<code data-x="">Keep</code>".</p>
+
+      <p class="note">The <code>html</code> element is <span
+      data-x="built-in non-replaceable elements list">non-replaceable</span>.</p>
+     </li>
+
+    </ol>
+   </li>
+
+   <li><p>Insert <var>element</var> as the last child of the <code>Document</code> object.</p></li>
+  </ol>
+  </div>
+
   <hr>
 
   <div algorithm>
@@ -145600,17 +145621,10 @@ document.body.appendChild(text);
 
    <dt>A start tag whose tag name is "html"</dt>
    <dd>
-    <p class="XXX">Sanitization is also bypassed by non-insertion mutations. The initial
-    <code>html</code> element is created/appended directly, and duplicate
-    <code>html</code>/<code>body</code> tokens merge attributes directly. Safe
-    <code>Document.parseHTML()</code> can therefore retain attributes such as <code>onclick</code> or
-    <code>onload</code>. Please add a sanitizer-aware operation for applying a token's attributes to an
-    existing element, and audit every tree-builder mutation path rather than only calls to the generic
-    insertion algorithm.</p>
-
     <p><span>Create an element for the token</span> in the <span>HTML namespace</span>, with the
-    <code>Document</code> as the intended parent. Append it to the <code>Document</code> object. Put
-    this element in the <span>stack of open elements</span>.</p>
+    <code>Document</code> as the intended parent. <span
+    data-x="Insert the root HTML element">Insert</span> it to the document. Put this element in the
+    <span>stack of open elements</span>.</p>
 
     <p>Switch the <span>insertion mode</span> to "<span data-x="insertion mode: before head">before
     head</span>".</p>
@@ -145628,9 +145642,10 @@ document.body.appendChild(text);
 
    <dt>Anything else</dt>
    <dd>
-    <p>Create an <code>html</code> element whose <span>node document</span> is the <code>Document</code> object. Append
-    it to the <code>Document</code> object. Put this element in the <span>stack of open
-    elements</span>.</p>
+    <p>Create an <code>html</code> element whose <span>node document</span> is the
+    <code>Document</code> object. <span data-x="Insert the root HTML element">Insert</span> it to
+    the <code>Document</code> object. Put this element in the
+    <span>stack of open elements</span>.</p>
 
     <p>Switch the <span>insertion mode</span> to "<span data-x="insertion mode: before head">before
     head</span>", then reprocess the token.</p>
@@ -146325,6 +146340,8 @@ document.body.appendChild(text);
     <p>Otherwise, for each attribute on the token, check to see if the attribute is already present
     on the top element of the <span>stack of open elements</span>. If it is not, add the attribute
     and its corresponding value to that element.</p>
+
+    <p><span>Sanitize</span> the element.</p>
    </dd>
 
    <dt>A start tag whose tag name is one of: "base", "basefont", "bgsound", "link", "meta",
@@ -146348,6 +146365,8 @@ document.body.appendChild(text);
     token, check to see if the attribute is already present on the <code>body</code> element (the
     second element) on the <span>stack of open elements</span>, and if it is not, add the attribute
     and its corresponding value to that element.</p>
+
+    <p><span>Sanitize</span> the element.</p>
    </dd>
 
    <dt>A start tag whose tag name is "frameset"</dt>
