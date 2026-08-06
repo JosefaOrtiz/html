@@ -125677,7 +125677,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   <div algorithm>
   <p>To <dfn>parse HTML from a string</dfn>, given a <code>Document</code> <var>document</var>, a
   <span>string</span> <var>html</var>, an optional <span>SanitizerConfig</span> or null
-  <var>configuration</var> (default null), and an optional boolean <var>safe</var> (default
+  <var>sanitizerConfig</var> (default null), and an optional boolean <var>safe</var> (default
   false):</p>
 
   <ol>
@@ -125689,8 +125689,8 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    data-x="concept-document-allow-declarative-shadow-roots">allow declarative shadow roots</span>,
    associated with <var>document</var>.</p></li>
 
-   <li><p>If <var>configuration</var> is not null, then set <var>parser</var>'s <span>parser
-   sanitizer configuration</span> to <var>configuration</var> and set <var>parser</var>'s
+   <li><p>If <var>sanitizerConfig</var> is not null, then set <var>parser</var>'s <span>parser
+   sanitizer configuration</span> to <var>sanitizerConfig</var> and set <var>parser</var>'s
    <span>remove javascript navigation URLs</span> to <var>safe</var>.</p></li>
 
    <li><p>Place <var>html</var> into the <span>input stream</span> for <var>parser</var>. The
@@ -126857,7 +126857,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    data-x="fragment-parser-mode-normal">Normal</span>; otherwise false.</p></li>
 
    <li><p>Let <var>sanitizerConfig</var> be the result of calling <span data-x="get a sanitizer
-   config from options">getting a sanitizer</span> from <var>options</var> give
+   config from options">getting a sanitizer config</span> from <var>options</var> given
    <var>safe</var>.</p></li>
 
    <li><p>Let <var>scriptingMode</var> be <span data-x="scripting-mode-inert">Inert</span>.</p></li>
@@ -126884,7 +126884,7 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
     <ol>
      <li>
-      <p>If <var>sanitizer</var> is non-null, then throw a <code>TypeError</code>.</p>
+      <p>If <var>sanitizerConfig</var> is non-null, then throw a <code>TypeError</code>.</p>
 
       <p class="note">Sanitization is only supported on HTML documents.</p>
      </li>
@@ -150702,7 +150702,7 @@ console.assert(container.firstChild instanceof SuperP);
    data-x="">limited-quirks</code>".</p></li>
 
    <li><p>Create a new <span>HTML parser</span>, associate it with <var>document</var>, set the
-   parser's <span>parser sanitizer configuration</span> to <var>configuration</var>, and set the parser's
+   parser's <span>parser sanitizer configuration</span> to <var>sanitizerConfig</var>, and set the parser's
    <span>remove javascript navigation URLs</span> to <var>safe</var>.</p></li>
 
    <li><p>If <var>contextDocument</var>'s <span data-x="concept-n-script">scripting is
@@ -150780,7 +150780,7 @@ console.assert(container.firstChild instanceof SuperP);
   optional boolean <var>allowDeclarativeShadowRoots</var> (default false), an optional
   <span>parser scripting mode</span> <var>scriptingMode</var> (default <span
   data-x="scripting-mode-inert">Inert</span>), an optional <span>SanitizerConfig</span> or null
-  <var>configuration</var> (default null), and an optional boolean <var>safe</var> (default false),
+  <var>sanitizerConfig</var> (default null), and an optional boolean <var>safe</var> (default false),
   is the following steps. They return a <code>DocumentFragment</code>.</p>
 
   <p class="note">Parts marked <dfn>fragment case</dfn> in algorithms in the <span>HTML
