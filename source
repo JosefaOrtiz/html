@@ -126664,6 +126664,9 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
   <ol>
    <li><p>Let <var>parent</var> be <var>node</var>'s <span>parent</span>.</p></li>
 
+   <li><p>If <var>parent</var> is a <code>Document</code>, then throw a
+   <span>"<code>HierarchyRequestError</code>"</span> <code>DOMException</code>.</p></li>
+
    <li><p>If <var>parent</var> is an <code>Element</code> or a <code>DocumentFragment</code>, then
    return <var>parent</var>.</p></li>
 
@@ -126748,9 +126751,10 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
 
   <div algorithm>
   <p>To <dfn>stream HTML</dfn> into an <code>Element</code> or <code>DocumentFragment</code>
-  <var>target</var>, given a <code>Node</code> or null <var>referenceChild</var>, a dictionary
-  <var>options</var>, and a <var>mode</var>, which is either <code data-x="">Safe</code> or <code
-  data-x="">Unsafe</code>:</p>
+  <var>target</var>, given a <code>Node</code> or null <var>referenceChild</var>, a dictionary or
+  <code data-x="tt-TrustedParserOptions">TrustedParserOptions</code><var>options</var>, and a
+  <var>mode</var>, which is either <code data-x="">Normal</code> or <code data-x="">Unsafe</code>
+  (default <code data-x="">Normal</code>):</p>
 
   <ol>
    <li><p>Let <var>safe</var> be true if <var>mode</var> is <code data-x="">Safe</code>; otherwise
@@ -126765,7 +126769,10 @@ enum <dfn enum>DOMParserSupportedType</dfn> {
    <li><p><span>Assert</span>: <var>contextElement</var> is non-null.</p></li>
 
    <li>
-    <p>Let <var>scriptingMode</var> be <span data-x="scripting-mode-normal">Normal</span>.</p>
+    <p>Let <var>scriptingMode</var> be <span data-x="scripting-mode-normal">Normal</span> if
+    <var>safe</var> is false and <var>options</var>["<code
+    data-x="dom-SetHTMLUnsafeOptions-runScripts">runScripts</code>"] is true; otherwise <span
+    data-x="scripting-mode-disabled">Inert</span>.</p>
 
     <p class="note">The normal scripting mode is used here to allow any inline scripts to execute as
     they are loaded, unless scripting is disabled.</p>
